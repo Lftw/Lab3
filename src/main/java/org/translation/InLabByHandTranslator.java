@@ -21,7 +21,7 @@ public class InLabByHandTranslator implements Translator {
     public static final String ENGLISH = "en";
     public static final String SPANISH = "es";
     public static final String HEBREW = "he";
-    public static final String ARABIC = "ar;"
+    public static final String ARABIC = "ar";
 
     /**
      * Returns the language abbreviations for all languages whose translations are
