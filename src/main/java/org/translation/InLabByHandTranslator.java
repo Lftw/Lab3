@@ -80,7 +80,7 @@ public class InLabByHandTranslator implements Translator {
                 case ARABIC:
                     value = "كندا";
                     break;
-                case FRENCG:
+                case FRENCH:
                     value = "Canada";
                     break;
                 default:
