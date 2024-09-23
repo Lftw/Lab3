@@ -83,9 +83,6 @@ public class InLabByHandTranslator implements Translator {
                 case FRENCH:
                     value = "Canada";
                     break;
-                case JAPANESE:
-                    value = "カナダ";
-                    break;
                 default:
                     break;
             }
