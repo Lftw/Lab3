@@ -6,14 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * This class provides the service of converting language codes to their names.
  */
 public class LanguageCodeConverter {
 
-    // TODO Task: pick appropriate instance variables to store the data necessary for this class
     HashMap<String, String> code_toName = new HashMap<>();
     HashMap<String, String> name_toCode = new HashMap<>();
 
@@ -36,16 +34,18 @@ public class LanguageCodeConverter {
             List<String> lines = Files.readAllLines(Paths.get(getClass()
                     .getClassLoader().getResource(filename).toURI()));
 
+            boolean skipped = false;
+
             // adding all the elements from the file to the HashMap
             for (String line : lines) {
+                // skip first line
+                if (!skipped) {
+                    skipped = true;
+                    continue;
+                }
                 String[] lineSplit = line.split("\\t");
                 String languageName = lineSplit[0];
                 String languageCode = lineSplit[1].toLowerCase();
-
-                // Ignore first line
-                if (languageName.equalsIgnoreCase("Language")) {
-                    continue;
-                }
 
                 this.code_toName.put(languageCode, languageName);
                 this.name_toCode.put(languageName, languageCode);
