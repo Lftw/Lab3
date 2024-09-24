@@ -23,6 +23,8 @@ public class InLabByHandTranslator implements Translator {
     public static final String HEBREW = "he";
     public static final String ARABIC = "ar";
     public static final String FRENCH = "fr";
+    public static final String BELARUSIAN = "be";
+    public static final String JAPANESE = "ja";
 
     /**
      * Returns the language abbreviations for all languages whose translations are
@@ -34,7 +36,7 @@ public class InLabByHandTranslator implements Translator {
     @Override
     public List<String> getCountryLanguages(String country) {
         if (CANADA.equals(country)) {
-            return new ArrayList<>(List.of(GERMAN, ENGLISH, CHINESE, SPANISH, HEBREW, ARABIC));
+            return new ArrayList<>(List.of(GERMAN, ENGLISH, CHINESE, SPANISH, HEBREW, ARABIC, BELARUSIAN, JAPANESE));
         }
         return new ArrayList<>();
     }
@@ -82,6 +84,12 @@ public class InLabByHandTranslator implements Translator {
                     break;
                 case FRENCH:
                     value = "Canada";
+                    break;
+                case BELARUSIAN:
+                    value = "Канада";
+                    break;
+                case JAPANESE:
+                    value = "カナダ";
                     break;
                 default:
                     break;
