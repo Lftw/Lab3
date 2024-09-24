@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * This class provides the service of converting country codes to their names.
@@ -37,8 +39,16 @@ public class CountryCodeConverter {
 
             for (String line : lines) {
                 String[] lineSplit = line.split("\\t");
-                this.countryToCode.put(lineSplit[0], lineSplit[1]);
-                this.codeToCountry.put(lineSplit[1], lineSplit[0]);
+                String countryName = lineSplit[0];
+                String countryCode = lineSplit[2].toLowerCase();
+
+                // Ignore first line
+                if (countryName.equalsIgnoreCase("Country")) {
+                    continue;
+                }
+
+                this.countryToCode.put(countryName, countryCode);
+                this.codeToCountry.put(countryCode, countryName);
             }
 
         }
@@ -54,7 +64,7 @@ public class CountryCodeConverter {
      * @return the name of the country corresponding to the code
      */
     public String fromCountryCode(String code) {
-        return this.codeToCountry.get(code);
+        return this.codeToCountry.get(code.toLowerCase());
     }
 
     /**
