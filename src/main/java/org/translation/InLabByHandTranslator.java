@@ -3,10 +3,6 @@ package org.translation;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO Task: modify this class so that it also supports the Spanish language code "es" and
-//            one more language code of your choice. Each member of your group should add
-//            support for one additional langauge code on a branch; then push and create a pull request on GitHub.
-
 // Extra Task: if your group has extra time, you can add support for another country code in this class.
 
 /**
@@ -36,7 +32,7 @@ public class InLabByHandTranslator implements Translator {
     @Override
     public List<String> getCountryLanguages(String country) {
         if (CANADA.equals(country)) {
-            return new ArrayList<>(List.of(GERMAN, ENGLISH, CHINESE, SPANISH, HEBREW, ARABIC, BELARUSIAN, JAPANESE));
+            return new ArrayList<>(List.of(GERMAN, ENGLISH, CHINESE, SPANISH, HEBREW, ARABIC, FRENCH, BELARUSIAN, JAPANESE));
         }
         return new ArrayList<>();
     }
@@ -68,6 +64,7 @@ public class InLabByHandTranslator implements Translator {
                     value = "Kanada";
                     break;
                 case ENGLISH:
+                case FRENCH:
                     value = "Canada";
                     break;
                 case CHINESE:
@@ -81,9 +78,6 @@ public class InLabByHandTranslator implements Translator {
                     break;
                 case ARABIC:
                     value = "كندا";
-                    break;
-                case FRENCH:
-                    value = "Canada";
                     break;
                 case BELARUSIAN:
                     value = "Канада";
