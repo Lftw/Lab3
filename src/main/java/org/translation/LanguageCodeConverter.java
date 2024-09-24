@@ -6,14 +6,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class provides the service of converting language codes to their names.
  */
 public class LanguageCodeConverter {
 
-    HashMap<String, String> code_toName = new HashMap<>();
-    HashMap<String, String> name_toCode = new HashMap<>();
+    private final Map<String, String> codeToName = new HashMap<>();
+    private final Map<String, String> nameToCode = new HashMap<>();
 
     /**
      * Default constructor which will load the language codes from "language-codes.txt"
@@ -47,10 +48,11 @@ public class LanguageCodeConverter {
                 String languageName = lineSplit[0];
                 String languageCode = lineSplit[1].toLowerCase();
 
-                this.code_toName.put(languageCode, languageName);
-                this.name_toCode.put(languageName, languageCode);
+                this.codeToName.put(languageCode, languageName);
+                this.nameToCode.put(languageName, languageCode);
             }
-        } catch (IOException | URISyntaxException ex) {
+        }
+        catch (IOException | URISyntaxException ex) {
             throw new RuntimeException(ex);
         }
 
@@ -62,7 +64,7 @@ public class LanguageCodeConverter {
      * @return the name of the language corresponding to the code
      */
     public String fromLanguageCode(String code) {
-        return this.code_toName.get(code);
+        return this.codeToName.get(code);
     }
 
     /**
@@ -71,7 +73,7 @@ public class LanguageCodeConverter {
      * @return the 2-letter code of the language
      */
     public String fromLanguage(String language) {
-        return this.name_toCode.get(language);
+        return this.nameToCode.get(language);
     }
 
     /**
@@ -79,10 +81,6 @@ public class LanguageCodeConverter {
      * @return how many languages are included in this code converter.
      */
     public int getNumLanguages() {
-        int i=0;
-        for (String element: this.code_toName.keySet()){
-            i++;
-        }
-        return i;
+        return this.codeToName.size();
     }
 }

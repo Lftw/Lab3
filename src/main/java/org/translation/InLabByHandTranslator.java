@@ -3,8 +3,6 @@ package org.translation;
 import java.util.ArrayList;
 import java.util.List;
 
-// Extra Task: if your group has extra time, you can add support for another country code in this class.
-
 /**
  * An implementation of the Translator interface which translates
  * the country code "can" to several languages.
@@ -32,7 +30,16 @@ public class InLabByHandTranslator implements Translator {
     @Override
     public List<String> getCountryLanguages(String country) {
         if (CANADA.equals(country)) {
-            return new ArrayList<>(List.of(GERMAN, ENGLISH, CHINESE, SPANISH, HEBREW, ARABIC, FRENCH, BELARUSIAN, JAPANESE));
+            return new ArrayList<>(List.of(
+                    GERMAN,
+                    ENGLISH,
+                    CHINESE,
+                    SPANISH,
+                    HEBREW,
+                    ARABIC,
+                    FRENCH,
+                    BELARUSIAN,
+                    JAPANESE));
         }
         return new ArrayList<>();
     }

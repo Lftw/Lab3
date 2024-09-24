@@ -16,6 +16,9 @@ public class Main {
 
     private static final String QUIT_COMMAND = "quit";
 
+    private static CountryCodeConverter countryConverter;
+    private static LanguageCodeConverter languageConverter;
+
     /**
      * This is the main entry point of our Translation System!<br/>
      * A class implementing the Translator interface is created and passed into a call to runProgram.
@@ -34,18 +37,23 @@ public class Main {
      * @param translator the Translator implementation to use in the program
      */
     public static void runProgram(Translator translator) {
+        countryConverter = new CountryCodeConverter();
+        languageConverter = new LanguageCodeConverter();
         while (true) {
             String country = promptForCountry(translator);
             if (QUIT_COMMAND.equals(country)) {
                 break;
             }
-            CountryCodeConverter countryConverter = new CountryCodeConverter();
-            String language = promptForLanguage(translator, countryConverter.fromCountry(country));
+            String countryName = countryConverter.fromCountry(country);
+            String language = promptForLanguage(translator, countryName);
             if (QUIT_COMMAND.equals(language)) {
                 break;
             }
-            LanguageCodeConverter languageConverter = new LanguageCodeConverter();
-            System.out.println(country + " in " + language + " is " + translator.translate(countryConverter.fromCountry(country), languageConverter.fromLanguage(language)));
+            System.out.println(country
+                    + " in "
+                    + language
+                    + " is "
+                    + translator.translate(countryName, languageConverter.fromLanguage(language)));
             System.out.println("Press enter to continue or quit to exit.");
             Scanner s = new Scanner(System.in);
             String textTyped = s.nextLine();
@@ -56,12 +64,10 @@ public class Main {
         }
     }
 
-    // Note: CheckStyle is configured so that we don't need javadoc for private methods
     private static String promptForCountry(Translator translator) {
-        CountryCodeConverter converter = new CountryCodeConverter();
         String countries = translator.getCountries()
                 .stream()
-                .map(converter::fromCountryCode)
+                .map(countryConverter::fromCountryCode)
                 .sorted()
                 .collect(Collectors.joining("\n"));
         System.out.println(countries);
@@ -73,14 +79,11 @@ public class Main {
 
     }
 
-    // Note: CheckStyle is configured so that we don't need javadoc for private methods
     private static String promptForLanguage(Translator translator, String country) {
-
-        LanguageCodeConverter converter = new LanguageCodeConverter();
         System.out.println(country);
         String languageNames = translator.getCountryLanguages(country)
                 .stream()
-                .map(converter::fromLanguageCode)
+                .map(languageConverter::fromLanguageCode)
                 .sorted()
                 .collect(Collectors.joining("\n"));
         System.out.println(languageNames);

@@ -4,19 +4,17 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * This class provides the service of converting country codes to their names.
  */
 public class CountryCodeConverter {
 
-    private Map<String, String> codeToCountry = new HashMap<>();
-    private Map<String, String> countryToCode = new HashMap<>();
+    private final Map<String, String> codeToCountry = new HashMap<>();
+    private final Map<String, String> countryToCode = new HashMap<>();
 
     /**
      * Default constructor which will load the country codes from "country-codes.txt"
@@ -43,7 +41,7 @@ public class CountryCodeConverter {
                 String countryCode = lineSplit[2].toLowerCase();
 
                 // Ignore first line
-                if (countryName.equalsIgnoreCase("Country")) {
+                if ("Country".equalsIgnoreCase(countryName)) {
                     continue;
                 }
 

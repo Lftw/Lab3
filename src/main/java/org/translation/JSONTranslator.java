@@ -5,10 +5,8 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -42,9 +40,6 @@ public class JSONTranslator implements Translator {
 
             JSONArray jsonArray = new JSONArray(jsonString);
 
-            // No duplicates!
-            Set<String> languageCodesSet = new HashSet<>();
-
             for (Object baseJsonObj : jsonArray) {
                 JSONObject jsonObject = (JSONObject) baseJsonObj;
                 String alpha3 = jsonObject.getString("alpha3");
@@ -53,7 +48,6 @@ public class JSONTranslator implements Translator {
                     if ("alpha2".equals(key) || "alpha3".equals(key) || "id".equals(key)) {
                         continue;
                     }
-                    languageCodesSet.add(key);
                     langMapping.put(key, jsonObject.getString(key));
                 }
                 this.translatorMapper.put(alpha3, langMapping);
