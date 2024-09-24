@@ -80,7 +80,6 @@ public class Main {
     }
 
     private static String promptForLanguage(Translator translator, String country) {
-        System.out.println(country);
         String languageNames = translator.getCountryLanguages(country)
                 .stream()
                 .map(languageConverter::fromLanguageCode)
