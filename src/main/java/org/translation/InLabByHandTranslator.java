@@ -23,7 +23,6 @@ public class InLabByHandTranslator implements Translator {
     public static final String HEBREW = "he";
     public static final String ARABIC = "ar";
     public static final String FRENCH = "fr";
-    public static final String BELARUSIAN = "by";
 
     /**
      * Returns the language abbreviations for all languages whose translations are
@@ -84,8 +83,6 @@ public class InLabByHandTranslator implements Translator {
                 case FRENCH:
                     value = "Canada";
                     break;
-                case BELARUSIAN:
-                    value = "Канада"
                 default:
                     break;
             }
