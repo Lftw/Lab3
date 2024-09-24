@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -22,7 +21,6 @@ public class JSONTranslator implements Translator {
 
     // This maps alpha3 code -> (Map from lang code -> country name)
     private final Map<String, Map<String, String>> translatorMapper = new HashMap<>();
-    private final List<String> languageCodes;
 
     /**
      * Constructs a JSONTranslator using data from the sample.json resources file.
@@ -60,8 +58,6 @@ public class JSONTranslator implements Translator {
                 }
                 this.translatorMapper.put(alpha3, langMapping);
             }
-            // returns an immutable list
-            this.languageCodes = List.copyOf(languageCodesSet);
 
         }
         catch (IOException | URISyntaxException ex) {
@@ -71,12 +67,12 @@ public class JSONTranslator implements Translator {
 
     @Override
     public List<String> getCountryLanguages(String country) {
-        return new ArrayList<>(this.translatorMapper.keySet());
+        return List.copyOf(this.translatorMapper.get(country).keySet());
     }
 
     @Override
     public List<String> getCountries() {
-        return this.languageCodes;
+        return List.copyOf(this.translatorMapper.keySet());
     }
 
     @Override
