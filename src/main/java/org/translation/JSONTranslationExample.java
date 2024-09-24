@@ -50,7 +50,7 @@ public class JSONTranslationExample {
             JSONObject jsonObject = (JSONObject) baseJsonObj;
             if (jsonObject.getString("alpha3").equals(countryCode)) {
                 String retVal = "Language code not found";
-                if (jsonObject.has("languageCode")) {
+                if (jsonObject.has(languageCode)) {
                     retVal = jsonObject.getString(languageCode);
                 }
                 return retVal;
